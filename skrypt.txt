@@ -1,75 +1,57 @@
-  int[][] plansza = new int[4][4];
-        
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[][] plansza = new int[10][10];
+
         Random r = new Random();
-       for(int okraz=0; okraz <9; okraz++){
-           ArrayList lista = new ArrayList() {{
-            add(1);
-            add(2);
-            add(3);
-            add(4);
-            add(5);
-            add(6);
-            add(7);
-            add(8);
-            add(9);                  
-        }};
-        
-        
-        for(int i=0; i <9; i++){
-            
-            int value = r.nextInt(lista.size());
-            int aktualnaWartosc=lista.get(value);
-            if(okraz>0){
-            
-            }
-            
-            
-            lista.remove(value)
-            
-        }
-       }
-        
-        int value;
-        int[] liczby_uzytewRzedzie = new int[8];
-        int[] liczby_uzytewKolumnie = new int[8];
-        int[] liczby_uzytewKwadracie = new int[8];
-        boolean switcher = true;
-        for(int x = 0; x<3; x++){
-            for(int y= 0; y<3; y++){
-              value = r.nextInt(9-1)+1;
-              for(int v:liczby_uzytewKwadracie){
-                  if(value == v){
-                      switcher = false;
-                  }
-              }
-              for(int v:liczby_uzytewRzedzie){
-                    if(value == v){
-                        switcher = false;
-                    }
-              }
-                for(int v:liczby_uzytewKolumnie){
-                    if(value == v){
-                        switcher = false;
+        for(int okraz=0; okraz <9; okraz++){
+            ArrayList lista = new ArrayList() {{
+                add(1);
+                add(2);
+                add(3);
+                add(4);
+                add(5);
+                add(6);
+                add(7);
+                add(8);
+                add(9);
+            }};
+
+
+            for(int i=0; i <9; i++){
+                boolean setable = true;
+                int value = r.nextInt(lista.size());
+                int aktualnaWartosc=Integer.parseInt(lista.get(value).toString());
+
+                if(okraz>0){
+                    for(int sprawdzarka=okraz;sprawdzarka>0;sprawdzarka--){
+                        if(plansza[sprawdzarka][i] == aktualnaWartosc){
+                            setable = false;
+                        }
                     }
                 }
-              if(switcher){
-                  plansza[x][y] = value;
-                  liczby_uzytewRzedzie[y] = value;
-                  liczby_uzytewKolumnie[x] = value;
-              }
-              else{
-                  if(y==3){
-                   y--;
-                   x--;
-                  }
-                  else{
-                  y--;}
-              }
-              switcher=true;
-            }}
-          for(int sprawdzarkaX=0; sprawdzarkaX<3; sprawdzarkaX++){
-           for(int sprawdzarkaY=0; sprawdzarkaY<3; sprawdzarkaY++){
-               System.out.print(plansza[sprawdzarkaX][sprawdzarkaY]);
-           }
-              System.out.println("\n");
-          }
+                if(setable) {
+                    plansza[okraz][i] = aktualnaWartosc;
+                    lista.remove(value);
+                }
+                else{
+                    i--;
+                }
+
+
+            }
+        }
+
+
+        for(int sprawdzarkaX=0; sprawdzarkaX<9; sprawdzarkaX++){
+            for(int sprawdzarkaY=0; sprawdzarkaY<9; sprawdzarkaY++){
+                System.out.print(plansza[sprawdzarkaX][sprawdzarkaY]);
+            }
+            System.out.println("\n");
+        }
+
+    }
+}
