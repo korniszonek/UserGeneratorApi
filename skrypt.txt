@@ -1,9 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.sudokutest;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Main {
-    public static void main(String[] args) {
+/**
+ *
+ * @author uszat
+ */
+public class SudokuTest {
 
+    public static void main(String[] args) {
         int[][] plansza = new int[10][10];
 
         Random r = new Random();
@@ -19,39 +29,106 @@ public class Main {
                 add(8);
                 add(9);
             }};
-
-
-            for(int i=0; i <9; i++){
+            int i =0;
+            while(i<9){
                 boolean setable = true;
                 int value = r.nextInt(lista.size());
                 int aktualnaWartosc=Integer.parseInt(lista.get(value).toString());
 
                 if(okraz>0){
-                    for(int sprawdzarka=okraz;sprawdzarka>0;sprawdzarka--){
+                    for(int sprawdzarka=okraz;sprawdzarka>=0;sprawdzarka--){
                         if(plansza[sprawdzarka][i] == aktualnaWartosc){
                             setable = false;
+                            break;
                         }
+                        
                     }
                 }
+                if(i>0 && i!=3 && i!=6 ){
+                    if(i==1 || i==4 || i==7){
+                      if(okraz==0 || okraz==3 || okraz==6){
+                        if(plansza[okraz +1][i-1] == aktualnaWartosc){
+                         setable = false;
+                        }
+                        if(plansza[okraz +2][i-1] == aktualnaWartosc){
+                         setable = false;
+                        }
+                      }
+                      if(okraz==1 || okraz==4 || okraz==7){
+                        if(plansza[okraz + 1][i-1] == aktualnaWartosc){
+                            setable = false;
+                         }
+                        if(plansza[okraz - 1][i-1] == aktualnaWartosc){
+                            setable = false;
+                         }}
+                      if(okraz==2 || okraz==5 || okraz ==8){
+                       if(plansza[okraz -1][i-1] == aktualnaWartosc){
+                         setable = false;
+                       }
+                       if(plansza[okraz-2][i-1]==aktualnaWartosc){
+                         setable = false;
+                       }
+                      }
+                    }
+                    if(i==2 || i==5 || i==8){
+                        if(okraz==0 || okraz==3 || okraz==6){
+                        if(plansza[okraz +1][i-1] == aktualnaWartosc){
+                         setable = false;
+                        }
+                        if(plansza[okraz +2][i-1] == aktualnaWartosc){
+                         setable = false;
+                        }
+                        if(plansza[okraz +1][i-2] == aktualnaWartosc){
+                         setable = false;
+                        }
+                        if(plansza[okraz +2][i-2] == aktualnaWartosc){
+                         setable = false;
+                        }
+                        
+                      }
+                       if(okraz==1 || okraz==4 || okraz==7){
+                        if(plansza[okraz + 1][i-1] == aktualnaWartosc){
+                            setable = false;
+                         }
+                        if(plansza[okraz - 1][i-1] == aktualnaWartosc){
+                            setable = false;
+                         }
+                         if(plansza[okraz + 1][i-2] == aktualnaWartosc){
+                            setable = false;
+                         }
+                        if(plansza[okraz - 1][i-2] == aktualnaWartosc){
+                            setable = false;
+                         }
+                       }
+                       if(okraz==2 || okraz==5 || okraz==8){
+                        if(plansza[okraz-1][i-1] == aktualnaWartosc){
+                             setable = false;
+                        }
+                        if(plansza[okraz-1][i-2] == aktualnaWartosc){
+                            setable = false;
+                        }
+                        if(plansza[okraz-2][i-1] == aktualnaWartosc){
+                             setable = false;
+                        }
+                        if(plansza[okraz-2][i-2] == aktualnaWartosc){
+                            setable = false;
+                        }
+                       }
+                       
+                    }
+                }
+                //if(okraz)
                 if(setable) {
                     plansza[okraz][i] = aktualnaWartosc;
                     lista.remove(value);
+                    i++;
+                    System.out.println("Dodano liczbe"+ aktualnaWartosc);
                 }
                 else{
-                    i--;
+                    System.out.println("Pominieto liczbe:" + aktualnaWartosc);
                 }
-
-
-            }
-        }
-
-
-        for(int sprawdzarkaX=0; sprawdzarkaX<9; sprawdzarkaX++){
-            for(int sprawdzarkaY=0; sprawdzarkaY<9; sprawdzarkaY++){
-                System.out.print(plansza[sprawdzarkaX][sprawdzarkaY]);
-            }
-            System.out.println("\n");
-        }
-
+                    
+                } 
+               
     }
-}
+}}
